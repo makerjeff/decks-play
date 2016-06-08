@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
+    <title>mobile vibes</title>
+
+    <style>
+    </style>
+</head>
+<body>
+<h1>mobile vibes</h1>
+
+<div id="results">
+</div>
+
+<div id="results2"></div>
+
+<div id="button-div">
+    <button id="button1">vibes</button>
+    <button id="button2">vibes 2</button>
+</div>
+
+<script>
+    window.addEventListener('load', function(event){
+
+        console.log('loaded');
+
+        var resultsDiv = document.getElementById('results');
+        var resultsDiv2 = document.getElementById('results2');
+
+        var button1 = document.getElementById('button1');
+        var button2 = document.getElementById('button2');
+
+        button1.addEventListener('click', function(event){
+            console.log('this is working.');
+            navigator.vibrate(1000);
+        });
+
+        button2.addEventListener('click', function(event){
+            console.log('vibes array');
+            navigator.vibrate([50,100,50,100,50,100,50,100]);
+        });
+
+        window.addEventListener('deviceorientation', handleOrient, true);
+
+        function handleOrient(event){
+            var absolute = event.absolute;
+            var alpha = event.alpha;
+            var beta = event.beta;
+            var gamma = event.gamma;
+
+            console.log(absolute + ', ' + alpha + ', ' + beta + ', ' + gamma);
+            resultsDiv.innerHTML = Number(absolute).toFixed(2) + '. ' + Number(alpha).toFixed(2) + ', ' + Number(beta).toFixed(2) + ', ' + Number(gamma).toFixed(2);
+        }
+
+        window.addEventListener('devicemotion', function handleMotion(event){
+            var accel = event.acceleration;
+            var accelGrav = event.accelerationIncludingGravity;
+            var rotationRate = event.rotationRate;
+            var interval = event.interval;
+
+            resultsDiv2.innerHTML = Number(accel.x).toFixed(2) + ', ' + Number(accel.y).toFixed(2) + ', ' + Number(accel.z).toFixed(2);
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

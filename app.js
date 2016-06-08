@@ -34,15 +34,19 @@ app.use(function(req, res, next){
 });
 
 // = logger
-app.use(function(req, res, next){
-    console.log('%s, %s, %s, %s', req,method, req.url, req.path. colors.yellow(Date().toString()));
-});
+// app.use(function(req, res, next){
+//     console.log('%s, %s, %s, %s', req,method, req.url, req.path. colors.yellow(Date().toString()));
+// });
+
+//server static files
+app.use(express.static(__dirname + "/public/"));
 
 // ========= ROUTES =========
 
 app.get('/debug', function(req, res){
     res.type('text/plain');
-    res.send(JSON.stringify(grabPackageInfo()));
+    res.send(grabPackageInfo().toString());
+    //res.send('this is working');
 });
 
 // basic 404 catch-all route
@@ -69,13 +73,18 @@ function initServer(port) {
 }
 
 function grabPackageInfo(){
-    fs.readFile('./package.json', function(err, data){
-        if(err) {
-            console.log(Error(err));
-        } else {
-            console.log(data);
-            return data;
-        }
-    });
 
+    var dump = function() {
+        fs.readFile('package.json', function(err, data){
+            if(err) {
+                console.log(Error(err));
+            } else {
+                console.log(data.toString());
+                return data;
+            }
+        });
+
+    }
+
+    return dump();
 }
