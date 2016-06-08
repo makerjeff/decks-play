@@ -8,7 +8,8 @@
     "colors":"latest",
     "express":"latest",
     "multer":"^1.1.0",
-    "body-parser":"^1.14.2"
+    "body-parser":"^1.14.2",
+    "socket.io":"latest"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
